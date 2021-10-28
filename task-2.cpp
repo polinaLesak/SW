@@ -7,6 +7,7 @@
 using namespace std;
 
 int find_element();
+int search_for_an_element_smaller_then_the_difference_of_the_previous_two();
 
 
 int main()
@@ -23,6 +24,13 @@ int main()
 		case 1:
 			find_element();
 			cout << endl;
+			break;
+		case 2:
+			search_for_an_element_smaller_then_the_difference_of_the_previous_two();
+			cout << endl;
+			break;
+		default:
+			cout << "Такого задания нет" << endl;
 			break;
 		}
 	} while (n != 0);
@@ -65,4 +73,19 @@ int find_element()
 	return 0;
 }
 
+int search_for_an_element_smaller_then_the_difference_of_the_previous_two()
+{
+	int size_of_array;
+	int* arr = entering_filling_oneDimensional_array(size_of_array);
 
+	for (int i = 3; i < size_of_array - 2; i++)
+	{
+		if (arr[i] < (arr[i - 2] - arr[i - 1]))
+		{
+			cout << "Число соответсвующее условию:  " << "[" << i + 1 << "]";
+			cout << arr[i] << "\n";
+		}
+	}
+
+	return 0;
+}
