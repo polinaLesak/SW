@@ -8,7 +8,7 @@ using namespace std;
 
 int find_element();
 int search_for_an_element_smaller_then_the_difference_of_the_previous_two();
-
+int max_lenght_of_repeating_elements();
 
 int main()
 {
@@ -27,6 +27,10 @@ int main()
 			break;
 		case 2:
 			search_for_an_element_smaller_then_the_difference_of_the_previous_two();
+			cout << endl;
+			break;
+		case 3:
+			max_lenght_of_repeating_elements();
 			cout << endl;
 			break;
 		default:
@@ -86,6 +90,39 @@ int search_for_an_element_smaller_then_the_difference_of_the_previous_two()
 			cout << arr[i] << "\n";
 		}
 	}
+
+	return 0;
+}
+
+int max_lenght_of_repeating_elements()
+{
+	int size_of_array;
+	int* arr = entering_filling_oneDimensional_array(size_of_array);
+	int i = 0, k = 0, max_value = 0, number_of_order, t;
+
+	while (i < size_of_array)
+	{
+		int p = 0;
+		t = arr[i];
+		while (arr[i] == t && i < size_of_array)
+		{
+			p++;
+			i++;
+		}
+		if (p >= max_value)
+			if (p > max_value) {
+				max_value = p;
+				number_of_order = t;
+			}
+			else  k = p;
+	}
+
+	if (max_value != k)
+		cout << "Количество чисел в наиболее длинной последовательности, состоящей из " << number_of_order << ": " << max_value;
+	else
+		cout << "Найдено несколько максимальных последовательностей длиной " << max_value;
+
+	cout << endl;
 
 	return 0;
 }
