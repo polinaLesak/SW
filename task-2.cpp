@@ -1,4 +1,4 @@
-﻿#include <iostream>
+﻿##include <iostream>
 #include <locale>
 #include <conio.h>
 #include <cstdlib>
@@ -10,6 +10,7 @@ int find_element();
 int search_for_an_element_smaller_then_the_difference_of_the_previous_two();
 int max_lenght_of_repeating_elements();
 int transposition();
+int max_distance();
 
 int main()
 {
@@ -36,6 +37,10 @@ int main()
 			break;
 		case 4:
 			transposition();
+			cout << endl;
+			break;
+		case 5:
+			max_distance();
 			cout << endl;
 			break;
 		default:
@@ -201,4 +206,42 @@ int transposition()
 	}
 
 	return 0;
+}
+
+int max_distance()
+{
+	double distance;
+	double max_distance = 0;
+	int dots;
+	cout << "Введите количество точек ";
+	cin >> dots;
+
+	int* coordinatesX = new int[dots];
+	int* coordinatesY = new int[dots];
+
+	for (int i = 0; i < dots; i++)
+	{
+		coordinatesX[i] = rand() % 21 - 10;
+		coordinatesY[i] = rand() % 21 - 10;
+	}
+	for (int i = 0; i < dots; i++)
+	{
+		cout << "(" << coordinatesX[i] << "," << coordinatesY[i] << ")" << endl;
+
+	}
+
+	for (int i = 0; i < dots; i++)
+	{
+		for (int k = 0; k < dots - 1; k++)
+		{
+			distance = sqrt((coordinatesX[i] - coordinatesX[k]) * (coordinatesX[i] - coordinatesX[k]) + (coordinatesY[i] - coordinatesY[k]) * (coordinatesY[i] - coordinatesY[k]));
+			if (distance > max_distance)
+			{
+				max_distance = distance;
+			}
+		}
+	}
+	cout << "Максимальное расстояние = " << max_distance << endl;
+	return 0;
+
 }
