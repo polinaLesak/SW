@@ -9,7 +9,7 @@ using namespace std;
 int find_element();
 int max_lenght_of_repeting_elements();
 int search_for_an_element_smaller_then_the_difference_of_the_previous_two();
-
+int transposition();
 
 int main()
 {
@@ -32,6 +32,10 @@ int main()
 			break;
 		case 3:
 			search_for_an_element_smaller_then_the_difference_of_the_previous_two();
+			cout << endl;
+			break;
+		case 4:
+			transposition();
 			cout << endl;
 			break;
 		default:
@@ -124,5 +128,76 @@ int search_for_an_element_smaller_then_the_difference_of_the_previous_two()
 		cout << "Найдено несколько максимальных последовательностей длиной " << max_value;
 
 	cout << endl;
+	return 0;
+}
+
+int** entering_filling_twoDimensional_array(int& nomber_of_rows, int& nomber_of_columns)
+{
+	srand(time(NULL));
+	cout << "Введите количество строк матрицы ";
+	cin >> nomber_of_rows;
+	cout << "Ведите количество столбцов матрицы ";
+	cin >> nomber_of_columns;
+
+	int** arr = new int* [nomber_of_rows];
+
+	for (int i = 0; i < nomber_of_rows; i++)
+		arr[i] = new int[nomber_of_columns];
+
+	for (int i = 0; i < nomber_of_rows; i++)
+	{
+		for (int j = 0; j < nomber_of_columns; j++)
+		{
+			arr[i][j] = rand() % 200 - 100;
+			cout << arr[i][j] << "\t ";
+		}
+		cout << endl;
+	}
+
+	return arr;
+}
+
+int transposition()
+{
+	int nomber_of_columns;
+	int nomber_of_rows;
+	int** arr = entering_filling_twoDimensional_array(nomber_of_rows, nomber_of_columns);
+	int** arrT = new int* [nomber_of_columns];
+	*arrT = new int[nomber_of_columns * nomber_of_rows];
+
+	for (int i = 1; i < nomber_of_columns; ++i)
+		arrT[i] = arrT[i - 1] + nomber_of_rows;
+	cout << endl;
+
+	for (int i = 0; i < nomber_of_rows; ++i)
+	{
+		for (int j = 0; j < nomber_of_columns; ++j)
+		{
+			arrT[j][i] = arr[i][j];
+		}
+	}
+
+	cout << "Транспонированная матрица по главной диагонали" << endl;
+
+	for (int i = 0; i < nomber_of_rows; ++i)
+	{
+		for (int j = 0; j < nomber_of_columns; ++j)
+		{
+			cout << arrT[i][j] << "\t ";
+		}
+		cout << endl;
+	}
+
+	cout << "Транспонированная матрица по побочной диагонали" << endl;
+
+	for (int i = 0; i < nomber_of_columns; i++)
+	{
+		for (int j = 0; j < nomber_of_rows; j++)
+		{
+			cout << arr[nomber_of_rows - 1 - j][nomber_of_columns - 1 - i] << "\t";
+		}
+		cout << endl;
+	}
+
 	return 0;
 }
